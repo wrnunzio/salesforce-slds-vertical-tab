@@ -1,0 +1,51 @@
+<!--
+ - verticalTabs
+ - @date 11/11/2024
+ - @createdBy n.capasso@almaviva.it
+ - @modifiedBy
+ - @history
+ -->
+
+<!-- Vertical Tabs -->
+<template>
+
+    <div class="slds-vertical-tabs mimh">
+        <lightning-spinner lwc:if={showSpinner} size="medium"></lightning-spinner>
+        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+
+
+            <template for:each={tabs} for:item="tab">
+                <li key={tab.tabid} class={tab.chosenTabClassLi} data-tabidli={tab.tabid} title={tab.tablabel}
+                    role="presentation">
+                    <a onclick={setTabActive} data-tabida={tab.tabid} class="slds-vertical-tabs__link" href="#"
+                       role="tab" tabindex="0" aria-selected={tab.isactive}
+                       aria-controls={tab.ariaControls}><!-- id={tab.anchorIdli}-->
+
+                        <!--<span >-->
+                        <!--   <span class="slds-icon_container slds-icon-standard-opportunity"
+                                 title="Description of icon when needed">-->
+                        <lightning-icon class="slds-vertical-tabs__left-icon" icon-name={tab.tabicon} size="small"
+                                        aria-hidden="true" title={tab.tabicondescription}></lightning-icon>
+                        <!-- </span>-->
+                        <!--  </span>-->
+                        <span class="slds-truncate" title={tab.tablabel}>{tab.tablabel}</span>
+                        <span class="slds-vertical-tabs__right-icon"></span>
+                    </a>
+                </li>
+
+            </template>
+
+
+        </ul>
+
+
+        <!-- Questo è il div contenitore obbligatorio -->
+        <!-- Passare contenuto con data-tabidcontent uguale a quello della tab -->
+        <!--
+        <div slot="tabContent" data-tabidcontent="Opportunities" class="slds-vertical-tabs__content" role="tabpanel">
+        -->
+        <slot name="tabContent"></slot>
+
+
+    </div>
+</template>
