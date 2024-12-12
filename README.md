@@ -1,7 +1,7 @@
 # 🌟 Vertical Tabs LWC salesforce-slds-vertical-tab
 
 ## 🛠️ Overview
-The **VerticalTabs** Lightning Web Component (LWC) provides a sleek vertical tab interface, perfect for organizing content in a user-friendly and accessible way. It leverages Salesforce Lightning Design System (SLDS) for a polished look and seamless integration.
+The **Vertical Tabs** Lightning Web Component (LWC) provides a sleek vertical tab interface, perfect for organizing content in a user-friendly and accessible way. It leverages Salesforce Lightning Design System (SLDS) for a polished look and seamless integration.
 
 ---
 
@@ -38,7 +38,7 @@ The component includes:
     - 🆔 `tabid`: Unique identifier for the tab.
     - 🟩 `isactive`: Marks the tab as active (true/false).
     - 🏷️ `tablabel`: The label displayed on the tab.
-    - 🎨 `tabicon`: Name of the SLDS icon used for the tab.
+    - 🎨 `tabicon`: Name of the SLDS icon used for the tab (see [lightningdesignsystem.com](https://www.lightningdesignsystem.com/icons/)).
     - ℹ️ `tabicondescription`: Tooltip text for the tab icon.
 
 - **`@api showSpinner`**:  
@@ -100,8 +100,6 @@ export default class Container extends LightningElement {
 
 ## 🎨 Styling
 This component uses SLDS utility classes (e.g., `slds-show`, `slds-hide`, `slds-is-active`) for layout and visuals. You can extend or override these styles with your own custom CSS if needed.
-
----
 
 
 
