@@ -1,68 +1,107 @@
-# 📊 Vertical Tabs LWC Component salesforce-slds-vertical-tab
+# 🌟 Vertical Tabs LWC salesforce-slds-vertical-tab
 
-## 🔎 Overview
-The Vertical Tabs component is a Lightning Web Component (LWC) realized with Salesforce slds. It provides a customizable, vertical tab interface that can be easily integrated into various Salesforce pages and apps.
+## 🛠️ Overview
+The **VerticalTabs** Lightning Web Component (LWC) provides a sleek vertical tab interface, perfect for organizing content in a user-friendly and accessible way. It leverages Salesforce Lightning Design System (SLDS) for a polished look and seamless integration.
+
+---
 
 ## ✨ Features
-- 📏 Vertical tab layout for efficient space usage
-- 🔄 Dynamic tab rendering based on provided data
-- 🖼️ Custom icons for each tab
-- ♿ Accessibility support with ARIA attributes
-- 🔄 Loading spinner for asynchronous content loading
+- 🔄 **Dynamic Tabs**: Automatically renders tabs based on the provided API property.
+- 🟢 **Active Tab Highlighting**: Dynamically updates the UI to show which tab is active.
+- 🌀 **Loading Spinner**: Displays a spinner while content is being updated for a smooth user experience.
+- 🎨 **Customizable Design**: Add labels, icons, and descriptions to tailor tabs to your use case.
+- ♿ **Accessible by Design**: Implements ARIA roles for improved accessibility.
 
-## 📁 File Structure
-- `verticalTabs.html`: The HTML template for the component
-- `verticalTabs.js`: The JavaScript file containing the component's logic
-- `verticalTabs.css`: The CSS file for component styling (not provided in the snippet)
-
-## 🚀 Usage
-To use this component in your Salesforce project:
-
-1. Import the component into your desired Lightning page or parent component.
-2. Provide an array of tab objects to the `tabs` property.
-3. Use the `tabContent` slot to pass in the content for each tab.
+---
 
 ## ⚠️ Important Note
 This implementation is a prototype and is not production-ready. It serves as a foundational example and requires further refinement and testing before being deployed in a live environment. Users should review and adjust the code to meet their specific requirements and ensure it adheres to best practices and security standards.
 
-## 🎥 Demonstration
+---
+
+## 📋 HTML Structure
+The component includes:
+- 🏠 **Parent Container**: A `div` styled with the SLDS class `slds-vertical-tabs`.
+- 📜 **Tab List**: A dynamically generated list of tabs (`<ul>`) containing:
+    - 🔗 Clickable links styled as `slds-vertical-tabs__link`.
+    - 🖼️ Integrated SLDS icons (`lightning-icon`) for visual enhancement.
+    - 🏷️ Labels and tooltips for each tab.
+- 🧩 **Slot for Content**: The `<slot>` named `tabContent` allows you to inject the content corresponding to each tab.
+
+---
+
+## 💻 JavaScript Functionality
+
+### 📂 Properties
+- **`@api tabs`**:  
+  An array of objects defining each tab, including:
+    - 🆔 `tabid`: Unique identifier for the tab.
+    - 🟩 `isactive`: Marks the tab as active (true/false).
+    - 🏷️ `tablabel`: The label displayed on the tab.
+    - 🎨 `tabicon`: Name of the SLDS icon used for the tab.
+    - ℹ️ `tabicondescription`: Tooltip text for the tab icon.
+
+- **`@api showSpinner`**:  
+  Toggles the visibility of a `lightning-spinner` during content transitions.
+
+---
+
+### 🔑 Key Methods
+1. **`setTabActive(event)`**:  
+   Activates the selected tab, updates the UI, and displays the corresponding content.
+
+2. **`deactivateAllTab()`**:  
+   Deactivates all tabs and hides all associated content.
+
+3. **`parsefy(data)`**:  
+   Clones objects to ensure input immutability.
+
+---
+
+## 🛠️ Example Usage
+
+### 🧩 Parent Component Markup
 ```html
-<c-vertical-tabs tabs={tabsData}>
-    <div slot="tabContent" data-tabidcontent="tab1">
-        <!-- Content for Tab 1 -->
+<c-vertical-tabs tabs={tabs} show-spinner="true">
+    <div slot="tabContent" data-tabidcontent="Tab1" class="slds-vertical-tabs__content">
+        <p>📄 Content for Tab 1</p>
     </div>
-    <div slot="tabContent" data-tabidcontent="tab2">
-        <!-- Content for Tab 2 -->
+    <div slot="tabContent" data-tabidcontent="Tab2" class="slds-vertical-tabs__content">
+        <p>📄 Content for Tab 2</p>
     </div>
 </c-vertical-tabs>
 ```
-## 🏷️ Tab Object Structure
-Each tab in the `tabs` array should have the following properties:
-- `tabid`: Unique identifier for the tab
-- `tablabel`: Display label for the tab
-- `tabicon`: Lightning Design System icon name
-- `tabicondescription`: Description for the icon (for accessibility)
-- `isactive`: Boolean indicating if the tab is currently active
-- `ariaControls`: ID of the content controlled by this tab
-- `chosenTabClassLi`: CSS classes for the tab's list item
 
-## 🎨 Customization
-The component uses SLDS (Salesforce Lightning Design System) classes for styling. You can further customize the appearance by modifying the CSS file (not provided in the snippet).
+### 🖥️ Parent Component JavaScript
+```javascript
+import { LightningElement } from 'lwc';
 
-## 📝 Notes
-- The component includes a loading spinner that can be shown/hidden using the `showSpinner` property.
-- Tab switching is handled by the `setTabActive` function.
+export default class Container extends LightningElement {
+    tabs = [
+        {
+            tabid: 'Tab1',
+            isactive: true,
+            tablabel: 'First Tab',
+            tabicon: 'standard:opportunity',
+            tabicondescription: 'Opportunity icon'
+        },
+        {
+            tabid: 'Tab2',
+            isactive: false,
+            tablabel: 'Second Tab',
+            tabicon: 'standard:account',
+            tabicondescription: 'Account icon'
+        }
+    ];
+}
+```
 
-## 🧠 verticalTabs.js Description
-The `verticalTabs.js` file contains the core logic for the Vertical Tabs component:
+---
 
-- It defines a `tabsConst` object with default properties for each tab.
-- The component uses `@api` decorators to expose properties for external configuration.
-- The `tabs` setter method processes the input tab data, adding necessary properties and classes.
-- It includes methods for tab activation (`setTabActive`) and deactivation (`deactivateAllTab`).
-- The component handles dynamic content loading and applies appropriate ARIA attributes for accessibility.
-- A `showSpinner` property is used to control the visibility of a loading spinner during tab operations.
-- The `connectedCallback` lifecycle hook is present but currently empty, allowing for future initialization logic.
-- The component uses `querySelectorAll` to manipulate DOM elements for tab switching and content display.
+## 🎨 Styling
+This component uses SLDS utility classes (e.g., `slds-show`, `slds-hide`, `slds-is-active`) for layout and visuals. You can extend or override these styles with your own custom CSS if needed.
+
+---
+
 
 

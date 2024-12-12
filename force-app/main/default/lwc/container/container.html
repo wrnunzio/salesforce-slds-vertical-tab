@@ -1,0 +1,31 @@
+<!--
+ - container
+ - @date 06/11/2024
+ - @createdBy wrnunzio
+ - @modifiedBy
+ - @history
+ -->
+
+<!-- Container -->
+<template>
+
+
+    <c-vertical-tabs tabs={tabs}>
+
+        <!--        <div slot="tabContent" data-tabidcontent="Opportunities" class="slds-vertical-tabs__content slds-hide" role="tabpanel">
+                    <c-custom-component></c-custom-component>
+                </div>-->
+
+        <div slot="tabContent" for:each={tabs} for:item=tab for:index=i key={tab.tabid} data-tabidcontent={tab.tabid}
+             class="slds-vertical-tabs__content slds-hide" role="tabpanel">
+            <div class="slds-text-longform">
+                <h3 class="slds-text-heading_medium">Tab {tab.tabid}</h3>
+                <p>Content for Tab {i}</p>
+                <p>Lorem ipsum dolor...</p>
+                <p>Lorem ipsum dolor...</p>
+            </div>
+        </div>
+
+    </c-vertical-tabs>
+
+</template>
